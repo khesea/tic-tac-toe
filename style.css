@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@600;700&display=swap');
+
+body {
+  background-color: beige;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-family: 'Shantell Sans', cursive;
+}
+
+.header {
+  font-size: 48px;
+  font-weight: 700;
+  color: #339966;
+  margin-bottom: 40px;
+}
+
+.square {
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.one {
+  border-right: 5px solid #996600;
+  border-bottom: 5px solid #996600;
+}
+
+.two {
+  border-right: 5px solid #996600;
+  border-bottom: 5px solid #996600;
+}
+
+.three {
+  border-bottom: 5px solid #996600;
+}
+
+.four {
+  border-right: 5px solid #996600;
+  border-bottom: 5px solid #996600;
+}
+
+.five {
+  border-right: 5px solid #996600;
+  border-bottom: 5px solid #996600;
+}
+
+.six {
+  border-bottom: 5px solid #996600;
+}
+
+.seven {
+  border-right: 5px solid #996600;
+}
+
+.eight {
+  border-right: 5px solid #996600;
+}
+
+.nine {
+
+}
+
+.checkmark {
+  width: 150px;
+  height: 150px;
+  display: block;
+  stroke-width: 2;
+  stroke: #CC0000;
+}
+
+.checkmark__circle {
+  stroke-dasharray: 160;
+  stroke-dashoffset: 160;
+  stroke-width: 2;
+  stroke: #000099;
+  fill: none;
+  animation: stroke 0.8s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 29;
+  stroke-dashoffset: 29;
+  animation: stroke 0.5s cubic-bezier(0.65, 0, 0.45, 1) 0.2s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 200vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 50px;
+  opacity: 0.6;
+  background-color: #303030;
+  z-index: 3
+}
+
+.popupWin_text {
+  font-size: 72px;
+  color: #336633;
+}
+
+.remove_popup {
+  font-size: 24px;
+  padding: 15px 25px;
+  border: 5px solid #996600;
+  background-color: #336633;
+  color: #fff;
+  border-radius: 12px;
+  font-family: 'Shantell Sans', cursive;
+  cursor: pointer;
+}
+
+.b-show {
+  display: flex;
+  animation: showBlock 0.7s linear forwards;
+}
+
+@keyframes showBlock {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

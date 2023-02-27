@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Tic-Tac_Toe</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="header">
+      <h1>Крестики-Нолики</h1>
+    </header>
+    <main class="main">
+      <article class="container">
+        <div class="one square" onclick="setX()"> </div>
+        <div class="two square" onclick="setX()"> </div>
+        <div class="three square" onclick="setX()"> </div>
+        <div class="four square" onclick="setX()"> </div>
+        <div class="five square" onclick="setX()"> </div>
+        <div class="six square" onclick="setX()"> </div>
+        <div class="seven square" onclick="setX()"> </div>
+        <div class="eight square" onclick="setX()"> </div>
+        <div class="nine square" onclick="setX()">  </div>
+      </article>
+    </main>
+    <div class="popupWin popup">
+      <p class="popupWin_text">Вы победили!</p>
+      <button type="button" class="remove_popup" onclick="removePopup()">Играть ещё!</button>
+    </div>
+    <div class="popupLose popup">
+      <p class="popupWin_text">Вы проиграли!</p>
+      <button type="button" class="remove_popup" onclick="removePopup()">Играть ещё!</button>
+    </div>
+    <div class="popupDraw popup">
+      <p class="popupWin_text">Ничья!</p>
+      <button type="button" class="remove_popup" onclick="removePopup()">Играть ещё!</button>
+    </div>
+    <script src="script.js" charset="utf-8"></script>
+  </body>
+</html>
