@@ -29,7 +29,7 @@ count = 0;
 
 //Тут я создаю ИИ
 function setX() {
-
+    //удаляю возможность нажатия повторно
     event.target.removeAttribute('onclick');
     //прибавление к счётчику, чтобы игра завершилась в случае ничьи
     count++;
@@ -41,23 +41,25 @@ function setX() {
         </svg>
         `;
 
-    //логическое выражение, чтобы игра завершилась
-    if (count<=4) {
       //ИИ добавляет нолик
-      let number = Math.floor(Math.random()*9);
-
-      if (!element[number].hasAttribute('who')) {
-        element[number].removeAttribute('onclick');
-        element[number].setAttribute('who', 'bot');
-        element[number].innerHTML += `
-        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-          <circle class="checkmark__circle" cx="26" cy="26" r="13" fill="none" />
-        </svg>
-        `;
-      } else {
+      if (count<=4) {
+        function setO() {
+          let number = Math.floor(Math.random()*8);
+          if (!element[number].hasAttribute('who')) {
+            //удаляю возможность нажатия повторно
+            element[number].removeAttribute('onclick');
+            element[number].setAttribute('who', 'bot');
+            element[number].innerHTML += `
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+              <circle class="checkmark__circle" cx="26" cy="26" r="13" fill="none" />
+            </svg>
+            `;
+          } else {
+            setO();
+          }
+        }
         setO();
-      };
-    }
+      }
 
       //смотрю где крестики, где нолики
       let one = element[0].getAttribute('who');
@@ -69,8 +71,6 @@ function setX() {
       let seven = element[6].getAttribute('who');
       let eight = element[7].getAttribute('who');
       let nine = element[8].getAttribute('who');
-
-      console.log(one, two, three, four, five, six, seven, eight, nine);
 
       //логика игры
       const oneUser = one == 'user' && ((two == 'user' && three == 'user') || (four == 'user' && seven == 'user') || (five == 'user' && nine == 'user'));
@@ -87,8 +87,11 @@ function setX() {
         setTimeout(function () {
           popup.showLosePopup();
         }, 500);
-      } else if (count == 5 && ((oneBot || twoBot || threeBot) || (oneUser || twoUser || threeUser))){
+      } else if (count == 5) {
         popup.showDrawPopup();
+        setTimeout(function () {
+          popup.showDrawPopup();
+        }, 500);
       }
 }
 
