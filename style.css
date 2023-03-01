@@ -16,6 +16,11 @@ body {
   margin-bottom: 40px;
 }
 
+.header-text {
+  user-select: none;
+  cursor: default;
+}
+
 .square {
   width: 150px;
   height: 150px;
@@ -65,10 +70,6 @@ body {
 
 .eight {
   border-right: 5px solid #996600;
-}
-
-.nine {
-
 }
 
 .checkmark {

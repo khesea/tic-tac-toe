@@ -23,7 +23,6 @@ let popup = {
   },
 };
 
-
 //обозначаю все квадраты и устанавливаю счётчик на 0
 let element = document.querySelectorAll('.square');
 count = 0;
@@ -31,20 +30,7 @@ count = 0;
 //Тут я создаю ИИ
 function setX() {
 
-  //удаляю кнопки, чтобы нельзя было нажать на несколько ячеек, пока ИИ решают куда сходить
-  for (var i = 0; i < 9; i++) {
-    element[i].removeAttribute('onclick');
-  }
-
-  //возвращаю кнопки
-  setTimeout(function () {
-    for (var j = 0; j < 9; j++) {
-        element[j].setAttribute('onclick', 'setX()')
-    }
-  }, 1100);
-
-  //проверка на наличие крестика-нолика в ячейке
-  if (!event.target.hasAttribute('who')) {
+    event.target.removeAttribute('onclick');
     //прибавление к счётчику, чтобы игра завершилась в случае ничьи
     count++;
     //добавляю крестик
@@ -58,71 +44,53 @@ function setX() {
     //логическое выражение, чтобы игра завершилась
     if (count<=4) {
       //ИИ добавляет нолик
-      setTimeout(function setO() {
-        let number = Math.floor(Math.random()*9);
+      let number = Math.floor(Math.random()*9);
 
-        if (!element[number].hasAttribute('who')) {
-          element[number].setAttribute('who', 'bot');
-          element[number].innerHTML += `
-          <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-            <circle class="checkmark__circle" cx="26" cy="26" r="13" fill="none" />
-          </svg>
-          `;
-        } else {
-          setO();
-        };
-      }, 200);
-    } else {
-      //конец игры, ничья
-      popup.showDrawPopup();
-    };
-
-    //Здесь вот логика игры
-    if (count>2) {
-      //смотрю где крестики, где нолики
-      setTimeout(function () {
-        let one = element[0].getAttribute('who');
-        let two = element[1].getAttribute('who');
-        let three = element[2].getAttribute('who');
-        let four = element[3].getAttribute('who');
-        let five = element[4].getAttribute('who');
-        let six = element[5].getAttribute('who');
-        let seven = element[6].getAttribute('who');
-        let eight = element[7].getAttribute('who');
-        let nine = element[8].getAttribute('who');
-
-        console.log(one, two, three, four, five, six, seven, eight, nine);
-
-        //на самом деле вот логика игры
-        const oneUser = one == 'user' && two == 'user' && three == 'user';
-        const twoUser = four == 'user' && five == 'user' && six == 'user';
-        const threeUser = seven == 'user' && eight == 'user' && nine == 'user';
-        const fourUser = one == 'user' && four == 'user' && seven == 'user';
-        const fiveUser = two == 'user' && five == 'user' && eight == 'user';
-        const sixUser = three == 'user' && six == 'user' && nine == 'user';
-        const sevenUser = one == 'user' && five == 'user' && nine == 'user';
-        const eightUser = three == 'user' && five == 'user' && seven == 'user';
-
-        const oneBot = one == 'bot' && two == 'bot' && three == 'bot';
-        const twoBot = four == 'bot' && five == 'bot' && six == 'bot';
-        const threeBot = seven == 'bot' && eight == 'bot' && nine == 'bot';
-        const fourBot = one == 'bot' && four == 'bot' && seven == 'bot';
-        const fiveBot = two == 'bot' && five == 'bot' && eight == 'bot';
-        const sixBot = three == 'bot' && six == 'bot' && nine == 'bot';
-        const sevenBot = one == 'bot' && five == 'bot' && nine == 'bot';
-        const eightBot = three == 'bot' && five == 'bot' && seven == 'bot';
-
-        if (oneUser || twoUser || threeUser || fourUser || fiveUser || sixUser || sevenUser || eightUser) {
-          popup.showWinPopup();
-        } else if (oneBot || twoBot || threeBot || fourBot || fiveBot || sixBot || sevenBot || eightBot) {
-          setTimeout(function () {
-            popup.showLosePopup();
-          }, 500);
-        }
-      }, 500);
+      if (!element[number].hasAttribute('who')) {
+        element[number].removeAttribute('onclick');
+        element[number].setAttribute('who', 'bot');
+        element[number].innerHTML += `
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="13" fill="none" />
+        </svg>
+        `;
+      } else {
+        setO();
+      };
     }
-  };
-};
+
+      //смотрю где крестики, где нолики
+      let one = element[0].getAttribute('who');
+      let two = element[1].getAttribute('who');
+      let three = element[2].getAttribute('who');
+      let four = element[3].getAttribute('who');
+      let five = element[4].getAttribute('who');
+      let six = element[5].getAttribute('who');
+      let seven = element[6].getAttribute('who');
+      let eight = element[7].getAttribute('who');
+      let nine = element[8].getAttribute('who');
+
+      console.log(one, two, three, four, five, six, seven, eight, nine);
+
+      //логика игры
+      const oneUser = one == 'user' && ((two == 'user' && three == 'user') || (four == 'user' && seven == 'user') || (five == 'user' && nine == 'user'));
+      const twoUser = nine == 'user' && ((three == 'user' && six == 'user') || (seven == 'user' && eight == 'user'));
+      const threeUser = five == 'user' && ((four == 'user' && six == 'user') || (two == 'user' && eight == 'user') || (three == 'user' && seven == 'user'));
+
+      const oneBot = one == 'bot' && ((two == 'bot' && three == 'bot') || (four == 'bot' && seven == 'bot') || (five == 'bot' && nine == 'bot'));
+      const twoBot = nine == 'bot' && ((three == 'bot' && six == 'bot') || (seven == 'bot' && eight == 'bot'));
+      const threeBot = five == 'bot' && ((four == 'bot' && six == 'bot') || (two == 'bot' && eight == 'bot') || (three == 'bot' && seven == 'bot'));
+
+      if ((oneUser || twoUser || threeUser) && count>2) {
+        popup.showWinPopup();
+      } else if ((oneBot || twoBot || threeBot) && count>2) {
+        setTimeout(function () {
+          popup.showLosePopup();
+        }, 500);
+      } else if (count == 5 && ((oneBot || twoBot || threeBot) || (oneUser || twoUser || threeUser))){
+        popup.showDrawPopup();
+      }
+}
 
 function removePopup() {
   location.reload();
